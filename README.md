@@ -1,6 +1,10 @@
 # SSL-ViT-Deepfake-Detection
+
 Self-Supervised Vision Transformer-based Deepfake Detection with Robustness Evaluation and Streamlit Deployment.
-Overview
+
+---
+
+## Overview
 
 This repository presents an end-to-end deep learning system for deepfake image detection using contrastive self-supervised learning and Vision Transformers.
 
@@ -8,63 +12,67 @@ The model first learns robust visual representations using contrastive self-supe
 
 This project demonstrates a complete machine learning lifecycle from data exploration to deployment.
 
-Key Features
+---
 
-Vision Transformer (ViT Tiny) backbone
+## Key Features
 
-Self-Supervised Contrastive Pretraining (NT-Xent Loss)
+- Vision Transformer (ViT Tiny) backbone  
+- Self-Supervised Contrastive Pretraining (NT-Xent Loss)  
+- Supervised Fine-Tuning for Binary Classification  
+- Clean Validation Metrics  
+- Robustness Testing under Gaussian Noise  
+- Streamlit-based Deployment Interface  
+- Modular Notebook-based Architecture  
 
-Supervised Fine-Tuning for Binary Classification
+---
 
-Clean Validation Metrics
-
-Robustness Testing under Gaussian Noise
-
-Streamlit-based Deployment Interface
-
-Modular Notebook-based Architecture
-
-System Architecture
+## System Architecture
 Input Image
-    ↓
+↓
 Preprocessing (Resize 224×224 + Normalize)
-    ↓
+↓
 Vision Transformer Encoder (SSL Pretrained)
-    ↓
+↓
 Linear Classification Head
-    ↓
+↓
 Sigmoid Activation
-    ↓
+↓
 Prediction (Real / Fake) + Confidence Score
-Model Configuration
 
-Backbone: vit_tiny_patch16_224
+---
 
-Embedding Dimension: 192
 
-Transformer Blocks: 12
+---
 
-Activation Function: GELU
+## Model Configuration
 
-SSL Loss: NT-Xent Contrastive Loss
+- Backbone: vit_tiny_patch16_224  
+- Embedding Dimension: 192  
+- Transformer Blocks: 12  
+- Activation Function: GELU  
+- SSL Loss: NT-Xent Contrastive Loss  
+- Fine-Tuning Loss: Binary Cross Entropy  
 
-Fine-Tuning Loss: Binary Cross Entropy
+---
 
-Model Performance
-Evaluation Setting	Accuracy	F1 Score	ROC-AUC
-Clean Validation	0.738	0.711	0.828
-Gaussian Noise	0.703	0.645	0.800
-Observations
+## Model Performance
 
-Strong separability on clean validation data (AUC = 0.828).
+| Evaluation Setting | Accuracy | F1 Score | ROC-AUC |
+|--------------------|----------|----------|---------|
+| Clean Validation   | 0.738    | 0.711    | 0.828   |
+| Gaussian Noise     | 0.703    | 0.645    | 0.800   |
 
-Limited degradation under Gaussian perturbations.
+### Observations
 
-Self-supervised pretraining improves robustness of learned representations.
+- Strong separability on clean validation data (AUC = 0.828)  
+- Limited degradation under Gaussian perturbations  
+- Self-supervised pretraining improves robustness of learned representations  
+- Transformer-based embeddings remain stable under noisy inputs  
 
-Transformer-based embeddings remain stable under noisy inputs.
+---
 
-Repository Structure
+## Repository Structure
+
 SSL-ViT-Deepfake-Detection/
 │
 ├── 1_Overview_and_EDA.ipynb
@@ -77,86 +85,83 @@ SSL-ViT-Deepfake-Detection/
 ├── classifier.pth
 │
 └── README.md
-Development Workflow
-1. Data Understanding
 
-Dataset inspection
+---
 
-Class distribution analysis
+## Development Workflow
 
-Domain validation
+### 1. Data Understanding
+- Dataset inspection  
+- Class distribution analysis  
+- Domain validation  
 
-2. Self-Supervised Pretraining
+### 2. Self-Supervised Pretraining
+- Dual augmentations  
+- Contrastive learning objective  
+- Vision Transformer encoder training  
+- Encoder saved as `ssl_encoder.pth`  
 
-Dual augmentations
+### 3. Supervised Fine-Tuning
+- Load pretrained encoder  
+- Add binary classification head  
+- Optimize using Binary Cross Entropy  
+- Model saved as `classifier.pth`  
 
-Contrastive learning objective
+### 4. Evaluation and Robustness
+- Clean validation evaluation  
+- Gaussian noise perturbation testing  
+- Final performance comparison  
 
-Vision Transformer encoder training
+### 5. Deployment
+- Streamlit-based interactive interface  
+- Real-time image inference  
+- Confidence score visualization  
 
-Encoder saved as ssl_encoder.pth
+---
 
-3. Supervised Fine-Tuning
+## Running the Project Locally
 
-Load pretrained encoder
+### Create Environment
 
-Add binary classification head
-
-Optimize using Binary Cross Entropy
-
-Model saved as classifier.pth
-
-4. Evaluation and Robustness
-
-Clean validation evaluation
-
-Gaussian noise perturbation testing
-
-Final performance comparison
-
-5. Deployment
-
-Streamlit-based interactive interface
-
-Real-time image inference
-
-Confidence score visualization
-
-Running the Project Locally
-Create Environment
 conda create -n deepfake python=3.9
 conda activate deepfake
 pip install torch torchvision timm streamlit scikit-learn albumentations opencv-python pillow
-Run Streamlit Application
+
+### Run Streamlit Application
+
 python -m streamlit run app.py
-Technology Stack
 
-Python
 
-PyTorch
+---
 
-timm (Vision Transformers)
+## Technology Stack
 
-Albumentations
+- Python  
+- PyTorch  
+- timm (Vision Transformers)  
+- Albumentations  
+- scikit-learn  
+- Streamlit  
+- OpenCV  
+- NumPy  
 
-scikit-learn
+---
 
-Streamlit
+## What This Project Demonstrates
 
-OpenCV
+- Representation learning with self-supervised learning  
+- Transformer-based image modeling  
+- End-to-end ML pipeline design  
+- Robustness evaluation methodology  
+- Deployment-ready inference system  
+- Clean modular project structuring  
 
-NumPy
+---
 
-What This Project Demonstrates
+## Future Improvements
 
-Representation learning with self-supervised learning
-
-Transformer-based image modeling
-
-End-to-end ML pipeline design
-
-Robustness evaluation methodology
-
-Deployment-ready inference system
-
-Clean modular project structuring
+- Attention heatmap visualization  
+- Video-based deepfake detection  
+- JPEG compression robustness testing  
+- Model quantization for faster inference  
+- Cloud deployment (AWS, GCP, Azure)  
