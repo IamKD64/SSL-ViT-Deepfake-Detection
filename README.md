@@ -69,24 +69,9 @@ Prediction (Real / Fake) + Confidence Score
 - Self-supervised pretraining improves robustness of learned representations  
 - Transformer-based embeddings remain stable under noisy inputs  
 
----
-
-## Repository Structure
-
-SSL-ViT-Deepfake-Detection/
-│
-├── 1_Overview_and_EDA.ipynb
-├── 2_SSL_Pretraining.ipynb
-├── 3_Fine_Tuning.ipynb
-├── 4_Evaluation_and_Robustness.ipynb
-│
-├── app.py
-├── ssl_encoder.pth
-├── classifier.pth
-│
-└── README.md
 
 ---
+
 
 ## Development Workflow
 
